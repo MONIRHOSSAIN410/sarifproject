@@ -1,0 +1,4 @@
+import mongoose from 'mongoose';
+const productSchema=new mongoose.Schema({name:{type:String,required:true,trim:true},slug:{type:String,required:true,unique:true},sku:{type:String,default:''},category:{type:mongoose.Schema.Types.ObjectId,ref:'Category',required:true},description:{type:String,required:true},shortDescription:{type:String,default:''},price:{type:Number,required:true,min:0},compareAtPrice:{type:Number,default:0},unit:{type:String,default:'500 g'},stock:{type:Number,default:0,min:0},images:{type:[String],default:[]},tags:{type:[String],default:[]},isFeatured:{type:Boolean,default:false},isActive:{type:Boolean,default:true},rating:{type:Number,default:0},reviewCount:{type:Number,default:0}},{timestamps:true});
+productSchema.index({name:'text',description:'text',tags:'text'});
+export default mongoose.model('Product',productSchema);
